@@ -1,14 +1,18 @@
-import 'package:fluent_picacg/utils/window_manager_handler.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'package:fluent_picacg/data/constants.dart';
-import 'package:window_manager/window_manager.dart';
+import 'package:fluent_picacg/utils/system_tray_manager.dart';
+import 'package:fluent_picacg/utils/window_manager_handler.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final windowManagerHandler = WindowManagerHandler();
   await windowManagerHandler.init(GlobalConstants.windowManagerOptions);
+
+  final systemTrayManager = SystemTrayManager();
+  await systemTrayManager.init();
 
   runApp(const MainApp());
 }

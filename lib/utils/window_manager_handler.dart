@@ -21,7 +21,6 @@ class WindowManagerHandler with WindowListener {
 
       windowManager.addListener(this);
 
-      // 延迟 focus
       Future.delayed(const Duration(milliseconds: 100), () async {
         await windowManager.focus();
       });
