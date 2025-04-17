@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:window_manager/window_manager.dart';
 
 import 'package:fluent_picacg/data/constants.dart';
+import 'package:fluent_picacg/data/routes.dart';
 import 'package:fluent_picacg/utils/system_tray_manager.dart';
 import 'package:fluent_picacg/utils/window_manager_handler.dart';
 
@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FluentApp(
+    return FluentApp.router(
       title: GlobalConstants.appName,
       theme: FluentThemeData(
         brightness: Brightness.light,
@@ -32,33 +32,7 @@ class MainApp extends StatelessWidget {
         brightness: Brightness.dark,
         accentColor: GlobalConstants.systemAccentColor,
       ),
-      home: ScaffoldPage(
-        padding: EdgeInsets.zero,
-        header: SizedBox(
-          height: 32,
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: GlobalConstants.appIcon,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8),
-                      child: const Text(GlobalConstants.appName),
-                    ),
-                  ],
-                ),
-              ),
-              const Expanded(child: WindowCaption()),
-            ],
-          ),
-        ),
-        content: Center(child: Text(GlobalConstants.appName)),
-      ),
+      routerConfig: globalRouter,
     );
   }
 }
