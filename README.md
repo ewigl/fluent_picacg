@@ -1,3 +1,3 @@
-# fluent_picacg
+# Fluent PicACG
 
-A new Flutter project.
+> Built with Flutter.
