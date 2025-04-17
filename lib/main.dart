@@ -26,11 +26,11 @@ class MainApp extends StatelessWidget {
       title: GlobalConstants.appName,
       theme: FluentThemeData(
         brightness: Brightness.light,
-        accentColor: GlobalConstants.systemAccentColor,
+        accentColor: GlobalConstants.picACGAccentColor,
       ),
       darkTheme: FluentThemeData(
         brightness: Brightness.dark,
-        accentColor: GlobalConstants.systemAccentColor,
+        accentColor: GlobalConstants.picACGAccentColor,
       ),
       routerConfig: globalRouter,
     );
