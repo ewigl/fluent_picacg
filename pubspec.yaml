@@ -1,6 +1,6 @@
 name: fluent_picacg
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -9,6 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  window_manager: ^0.4.3
+  system_tray: ^2.0.3
+  fluent_ui: ^4.11.3
 
 dev_dependencies:
   flutter_test:
