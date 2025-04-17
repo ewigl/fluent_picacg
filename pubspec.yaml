@@ -20,4 +20,10 @@ dev_dependencies:
   flutter_lints: ^5.0.0
 
 flutter:
+  assets:
+    - assets/images/
+    - assets/images/icons/
+    - assets/images/notifications/
+    - assets/images/placeholders/
+
   uses-material-design: true
