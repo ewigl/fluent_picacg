@@ -1,8 +1,15 @@
+import 'package:fluent_picacg/utils/window_manager_handler.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:fluent_picacg/data/constants.dart';
+import 'package:window_manager/window_manager.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final windowManagerHandler = WindowManagerHandler();
+  await windowManagerHandler.init(GlobalConstants.windowManagerOptions);
+
   runApp(const MainApp());
 }
 
@@ -23,6 +30,29 @@ class MainApp extends StatelessWidget {
       ),
       home: ScaffoldPage(
         padding: EdgeInsets.zero,
+        header: SizedBox(
+          height: 32,
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: GlobalConstants.appIcon,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: const Text(GlobalConstants.appName),
+                    ),
+                  ],
+                ),
+              ),
+              const Expanded(child: WindowCaption()),
+            ],
+          ),
+        ),
         content: Center(child: Text(GlobalConstants.appName)),
       ),
     );
