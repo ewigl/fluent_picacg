@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
+
+import 'package:fluent_picacg/data/constants.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,11 +11,19 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return FluentApp(
+      title: GlobalConstants.appName,
+      theme: FluentThemeData(
+        brightness: Brightness.light,
+        accentColor: GlobalConstants.systemAccentColor,
+      ),
+      darkTheme: FluentThemeData(
+        brightness: Brightness.dark,
+        accentColor: GlobalConstants.systemAccentColor,
+      ),
+      home: ScaffoldPage(
+        padding: EdgeInsets.zero,
+        content: Center(child: Text(GlobalConstants.appName)),
       ),
     );
   }
