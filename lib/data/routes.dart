@@ -236,32 +236,18 @@ Widget? _buildLeadingButton(BuildContext context) {
           ? lastMatch.matches.uri
           : currentConfiguration.uri;
   final bool canPop = location.pathSegments.length > 1;
+
   return canPop
       ? NavigationPaneTheme(
-        data: NavigationPaneTheme.of(context).merge(
-          NavigationPaneThemeData(
-            unselectedIconColor: WidgetStateProperty.resolveWith((states) {
-              if (states.isDisabled) {
-                return ButtonThemeData.buttonColor(context, states);
-              }
-              return ButtonThemeData.uncheckedInputColor(
-                FluentTheme.of(context),
-                states,
-              ).basedOnLuminance();
-            }),
-          ),
-        ),
+        data: NavigationPaneThemeData(),
         child: Builder(
           builder:
               (context) => PaneItem(
-                icon: const Center(child: Icon(FluentIcons.back, size: 12.0)),
+                icon: const Center(child: Icon(FluentIcons.back)),
                 title: Text('返回'),
                 body: const SizedBox.shrink(),
-                enabled: canPop,
               ).build(context, false, () {
-                if (canPop) {
-                  GoRouter.of(context).pop();
-                }
+                GoRouter.of(context).pop();
               }, displayMode: PaneDisplayMode.compact),
         ),
       )
