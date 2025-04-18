@@ -11,7 +11,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final windowManagerHandler = WindowManagerHandler();
-  await windowManagerHandler.init(GlobalConstants.windowManagerOptions);
+  await windowManagerHandler.init();
 
   final systemTrayManager = SystemTrayManager();
   await systemTrayManager.init();

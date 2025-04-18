@@ -1,3 +1,4 @@
+import 'package:fluent_picacg/data/constants.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -9,11 +10,18 @@ class WindowManagerHandler with WindowListener {
 
   WindowManagerHandler._internal();
 
-  Future<void> init(WindowOptions windowOptions) async {
+  static const WindowOptions windowManagerOptions = WindowOptions(
+    title: GlobalConstants.appName,
+    minimumSize: Size(540, 540),
+    titleBarStyle: TitleBarStyle.hidden,
+    center: true,
+  );
+
+  Future<void> init() async {
     try {
       await windowManager.ensureInitialized();
 
-      await windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.waitUntilReadyToShow(windowManagerOptions, () async {
         await windowManager.show();
       });
 

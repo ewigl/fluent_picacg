@@ -1,5 +1,4 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:window_manager/window_manager.dart';
 
 class GlobalConstants {
   // app properties
@@ -13,13 +12,6 @@ class GlobalConstants {
 
   static final Image trayIconPng = Image.asset('assets/images/logo.png');
   static const String trayIconPngPath = 'assets/images/logo.png';
-
-  // window properties
-  static const WindowOptions windowManagerOptions = WindowOptions(
-    title: appName,
-    minimumSize: Size(540, 720),
-    titleBarStyle: TitleBarStyle.hidden,
-  );
 
   // theme colors
   static final AccentColor picACGAccentColor =
