@@ -1,12 +1,16 @@
-import 'package:fluent_picacg/pages/categories_page.dart';
-import 'package:fluent_picacg/pages/favourites_page.dart';
+import 'package:fluent_picacg/data/states.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'package:fluent_picacg/data/constants.dart';
+import 'package:fluent_picacg/pages/categories_page.dart';
+import 'package:fluent_picacg/pages/favourites_page.dart';
 import 'package:fluent_picacg/pages/home_page.dart';
 import 'package:fluent_picacg/pages/leaderboard_page.dart';
+import 'package:fluent_picacg/pages/user_page.dart';
+import 'package:fluent_picacg/pages/settings_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(
   debugLabel: 'root',
@@ -85,14 +89,14 @@ final GoRouter globalRouter = GoRouter(
           name: 'user',
           path: '/user',
           builder: (BuildContext context, GoRouterState state) {
-            return const Center(child: Text('用户'));
+            return const UserPage();
           },
         ),
         GoRoute(
           name: 'settings',
           path: '/settings',
           builder: (BuildContext context, GoRouterState state) {
-            return const Center(child: Text('设置'));
+            return SettingsPage();
           },
         ),
       ],
@@ -147,23 +151,15 @@ class ScaffoldWithNavBar extends StatelessWidget {
       padding: EdgeInsets.zero,
       header: SizedBox(
         height: kWindowCaptionHeight,
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: Row(
-                spacing: 8,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: GlobalConstants.appIcon,
-                  ),
-                  const Text(GlobalConstants.appName),
-                ],
-              ),
-            ),
-            const Expanded(child: WindowCaption()),
-          ],
+        child: WindowCaption(
+          title: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: GlobalConstants.appIcon,
+          ),
+          brightness:
+              context.watch<AppSettingsState>().theme == ThemeMode.dark
+                  ? Brightness.dark
+                  : Brightness.light,
         ),
       ),
       content: NavigationView(
