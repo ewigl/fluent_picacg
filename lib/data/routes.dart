@@ -154,7 +154,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
         child: WindowCaption(
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: GlobalConstants.appIcon,
+            child: AppConstants.appIcon,
           ),
           brightness:
               context.watch<AppSettingsState>().theme == ThemeMode.dark

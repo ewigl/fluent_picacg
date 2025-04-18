@@ -12,12 +12,12 @@ class SystemTrayManager {
   Future<void> init() async {
     String path =
         Platform.isWindows
-            ? GlobalConstants.trayIconPath
-            : GlobalConstants.trayIconPngPath;
+            ? AppConstants.trayIconPath
+            : AppConstants.trayIconPngPath;
 
     await _systemTray.initSystemTray(
       iconPath: path,
-      toolTip: GlobalConstants.appName,
+      toolTip: AppConstants.appName,
     );
 
     await menu.buildFrom([

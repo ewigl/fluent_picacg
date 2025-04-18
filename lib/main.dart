@@ -30,14 +30,14 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FluentApp.router(
-      title: GlobalConstants.appName,
+      title: AppConstants.appName,
       theme: FluentThemeData(
         brightness: Brightness.light,
-        accentColor: GlobalConstants.picACGAccentColor,
+        accentColor: AppConstants.picACGAccentColor,
       ),
       darkTheme: FluentThemeData(
         brightness: Brightness.dark,
-        accentColor: GlobalConstants.picACGAccentColor,
+        accentColor: AppConstants.picACGAccentColor,
       ),
       themeMode: context.watch<AppSettingsState>().theme,
       routerConfig: globalRouter,
