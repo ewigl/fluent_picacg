@@ -1,7 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:provider/provider.dart';
 
 import 'package:fluent_picacg/data/constants.dart';
 import 'package:fluent_picacg/data/routes.dart';
+import 'package:fluent_picacg/data/states.dart';
 import 'package:fluent_picacg/utils/system_tray_manager.dart';
 import 'package:fluent_picacg/utils/window_manager_handler.dart';
 
@@ -14,7 +16,12 @@ Future<void> main() async {
   final systemTrayManager = SystemTrayManager();
   await systemTrayManager.init();
 
-  runApp(const MainApp());
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => AppSettingsState())],
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -32,6 +39,7 @@ class MainApp extends StatelessWidget {
         brightness: Brightness.dark,
         accentColor: GlobalConstants.picACGAccentColor,
       ),
+      themeMode: context.watch<AppSettingsState>().theme,
       routerConfig: globalRouter,
     );
   }
