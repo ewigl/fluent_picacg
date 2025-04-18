@@ -81,6 +81,20 @@ final GoRouter globalRouter = GoRouter(
             return const FavouritesPage();
           },
         ),
+        GoRoute(
+          name: 'user',
+          path: '/user',
+          builder: (BuildContext context, GoRouterState state) {
+            return const Center(child: Text('用户'));
+          },
+        ),
+        GoRoute(
+          name: 'settings',
+          path: '/settings',
+          builder: (BuildContext context, GoRouterState state) {
+            return const Center(child: Text('设置'));
+          },
+        ),
       ],
     ),
   ],
@@ -180,7 +194,12 @@ class ScaffoldWithNavBar extends StatelessWidget {
       return 2;
     } else if (location.startsWith('/favourites')) {
       return 3;
+    } else if (location.startsWith('/user')) {
+      return 4;
+    } else if (location.startsWith('/settings')) {
+      return 5;
     }
+
     return 0;
   }
 
@@ -198,6 +217,12 @@ class ScaffoldWithNavBar extends StatelessWidget {
         break;
       case 3:
         GoRouter.of(context).pushNamed('favourites');
+        break;
+      case 4:
+        GoRouter.of(context).pushNamed('user');
+        break;
+      case 5:
+        GoRouter.of(context).pushNamed('settings');
         break;
       default:
         GoRouter.of(context).pushNamed('homepage');
