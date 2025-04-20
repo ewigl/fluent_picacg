@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter_single_instance/flutter_single_instance.dart';
 import 'package:provider/provider.dart';
 
 import 'package:fluent_picacg/data/constants.dart';
@@ -9,6 +11,16 @@ import 'package:fluent_picacg/utils/window_manager_handler.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  if (!await FlutterSingleInstance().isFirstInstance()) {
+    final err = await FlutterSingleInstance().focus();
+
+    if (err != null) {
+      debugPrint('Error focusing the first instance: $err');
+    }
+
+    exit(0);
+  }
 
   final windowManagerHandler = WindowManagerHandler();
   await windowManagerHandler.init();
