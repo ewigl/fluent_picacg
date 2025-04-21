@@ -63,6 +63,7 @@ class WindowManagerHandler with WindowListener {
     _debounce?.cancel();
   }
 
+  // 窗口停靠时也会调用 moved
   @override
   void onWindowMoved() async {
     if (_appSettingsState == null) return;
