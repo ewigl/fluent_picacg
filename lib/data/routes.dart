@@ -149,19 +149,19 @@ class ScaffoldWithNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldPage(
       padding: EdgeInsets.zero,
-      header: SizedBox(
-        height: kWindowCaptionHeight,
-        child: WindowCaption(
-          title: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: AppConstants.appIcon,
-          ),
-          brightness:
-              context.watch<AppSettingsState>().theme == ThemeMode.dark
-                  ? Brightness.dark
-                  : Brightness.light,
-        ),
-      ),
+      // header: SizedBox(
+      //   height: kWindowCaptionHeight,
+      //   child: WindowCaption(
+      //     title: Padding(
+      //       padding: const EdgeInsets.symmetric(vertical: 8.0),
+      //       child: AppConstants.appIcon,
+      //     ),
+      //     brightness:
+      //         context.watch<AppSettingsState>().theme == ThemeMode.dark
+      //             ? Brightness.dark
+      //             : Brightness.light,
+      //   ),
+      // ),
       content: NavigationView(
         appBar: NavigationAppBar(
           automaticallyImplyLeading: false,

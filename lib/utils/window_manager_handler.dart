@@ -18,7 +18,7 @@ class WindowManagerHandler with WindowListener {
 
   static const WindowOptions windowManagerOptions = WindowOptions(
     title: AppConstants.appName,
-    titleBarStyle: TitleBarStyle.hidden,
+    // titleBarStyle: TitleBarStyle.hidden,
     minimumSize: Size(540, 540),
   );
 
