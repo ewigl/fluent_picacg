@@ -3,6 +3,7 @@ import 'package:system_tray/system_tray.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'package:fluent_picacg/data/constants.dart';
+import 'package:fluent_picacg/utils/sembast_database.dart';
 
 class SystemTrayManager {
   final SystemTray _systemTray = SystemTray();
@@ -27,6 +28,10 @@ class SystemTrayManager {
       MenuItemLabel(
         label: '退出程序',
         onClicked: (_) async {
+          // 关闭数据库
+          final db = SembastDatabase();
+          await db.close();
+
           await windowManager.setPreventClose(false);
           _appWindow.close();
         },
