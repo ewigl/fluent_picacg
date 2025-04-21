@@ -14,7 +14,6 @@ class WindowManagerHandler with WindowListener {
     title: AppConstants.appName,
     minimumSize: Size(540, 540),
     titleBarStyle: TitleBarStyle.hidden,
-    center: true,
   );
 
   Future<void> init() async {
