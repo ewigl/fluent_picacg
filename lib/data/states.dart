@@ -33,60 +33,49 @@ class AppSettingsState with ChangeNotifier {
 
   // 从数据库加载所有设置
   Future<void> _loadSettings() async {
-    try {
-      final settings = await _db.getSettings();
-      if (settings != null) {
-        // 加载主题
-        switch (settings['theme']) {
-          case 'light':
-            _theme = ThemeMode.light;
-            break;
-          case 'dark':
-            _theme = ThemeMode.dark;
-            break;
-          case 'system':
-          default:
-            _theme = ThemeMode.system;
-            break;
-        }
-
-        // 加载图片质量
-        switch (settings['imageQuality']) {
-          case 'low':
-            _imageQuality = ImageQuality.low;
-            break;
-          case 'high':
-            _imageQuality = ImageQuality.high;
-            break;
-          case 'medium':
-            _imageQuality = ImageQuality.medium;
-            break;
-          case 'original':
-          default:
-            _imageQuality = ImageQuality.original;
-            break;
-        }
-
-        notifyListeners();
-      } else {
-        debugPrint('No settings found in database, using defaults');
+    final settings = await _db.getSettings();
+    if (settings != null) {
+      // 加载主题
+      switch (settings['theme']) {
+        case 'light':
+          _theme = ThemeMode.light;
+          break;
+        case 'dark':
+          _theme = ThemeMode.dark;
+          break;
+        case 'system':
+        default:
+          _theme = ThemeMode.system;
+          break;
       }
-    } catch (e) {
-      debugPrint('Failed to load settings: $e');
+
+      // 加载图片质量
+      switch (settings['imageQuality']) {
+        case 'low':
+          _imageQuality = ImageQuality.low;
+          break;
+        case 'medium':
+          _imageQuality = ImageQuality.medium;
+          break;
+        case 'high':
+          _imageQuality = ImageQuality.high;
+          break;
+        case 'original':
+        default:
+          _imageQuality = ImageQuality.original;
+          break;
+      }
+
+      notifyListeners();
     }
   }
 
   // 保存所有设置到数据库
   Future<void> _saveSettings() async {
-    try {
-      final settings = {
-        'theme': _theme.toString().split('.').last,
-        'imageQuality': _imageQuality.toString().split('.').last,
-      };
-      await _db.saveSettings(settings);
-      debugPrint('Settings saved: $settings');
-    } catch (e) {
-      debugPrint('Failed to save settings: $e');
-    }
+    final settings = {
+      'theme': _theme.toString().split('.').last,
+      'imageQuality': _imageQuality.toString().split('.').last,
+    };
+    await _db.saveSettings(settings);
   }
 }
