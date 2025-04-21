@@ -22,15 +22,18 @@ Future<void> main() async {
     exit(0);
   }
 
+  // 创建 AppSettingsState 实例
+  final appSettingsState = AppSettingsState();
+
   final windowManagerHandler = WindowManagerHandler();
-  await windowManagerHandler.init();
+  await windowManagerHandler.init(appSettingsState: appSettingsState);
 
   final systemTrayManager = SystemTrayManager();
   await systemTrayManager.init();
 
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => AppSettingsState())],
+      providers: [ChangeNotifierProvider(create: (_) => appSettingsState)],
       child: const MainApp(),
     ),
   );
@@ -41,6 +44,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appSettingsState = context.watch<AppSettingsState>();
+
     return FluentApp.router(
       title: AppConstants.appName,
       theme: FluentThemeData(
@@ -51,7 +56,7 @@ class MainApp extends StatelessWidget {
         brightness: Brightness.dark,
         accentColor: AppConstants.picACGAccentColor,
       ),
-      themeMode: context.watch<AppSettingsState>().theme,
+      themeMode: appSettingsState.theme,
       routerConfig: globalRouter,
     );
   }
