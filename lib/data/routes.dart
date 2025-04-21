@@ -1,10 +1,10 @@
-import 'package:fluent_picacg/data/states.dart';
+// import 'package:fluent_picacg/data/states.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-import 'package:window_manager/window_manager.dart';
+// import 'package:provider/provider.dart';
+// import 'package:window_manager/window_manager.dart';
 
-import 'package:fluent_picacg/data/constants.dart';
+// import 'package:fluent_picacg/data/constants.dart';
 import 'package:fluent_picacg/pages/categories_page.dart';
 import 'package:fluent_picacg/pages/favourites_page.dart';
 import 'package:fluent_picacg/pages/home_page.dart';
