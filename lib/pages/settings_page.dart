@@ -32,6 +32,30 @@ class SettingsPage extends StatelessWidget {
             ],
           ),
         ),
+        const SizedBox(height: 8.0),
+        Card(
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            alignment: WrapAlignment.spaceBetween,
+            children: [
+              const Text('图片质量', style: TextStyle(fontSize: 16)),
+              ComboBox<ImageQuality>(
+                value: appSettingsState.imageQuality,
+                items: const [
+                  ComboBoxItem(value: ImageQuality.original, child: Text('原图')),
+                  ComboBoxItem(value: ImageQuality.high, child: Text('清晰')),
+                  ComboBoxItem(value: ImageQuality.medium, child: Text('中等')),
+                  ComboBoxItem(value: ImageQuality.low, child: Text('模糊')),
+                ],
+                onChanged: (value) {
+                  if (value != null) {
+                    appSettingsState.imageQuality = value;
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
