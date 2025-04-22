@@ -1,4 +1,5 @@
 // import 'package:fluent_picacg/data/states.dart';
+import 'package:fluent_picacg/pages/sign_in_page.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:go_router/go_router.dart';
 // import 'package:provider/provider.dart';
@@ -21,8 +22,15 @@ final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>(
 
 final GoRouter globalRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/homepage',
+  initialLocation: '/sign-in',
   routes: <RouteBase>[
+    GoRoute(
+      name: 'sign-in',
+      path: '/sign-in',
+      builder: (BuildContext context, GoRouterState state) {
+        return const SignInPage();
+      },
+    ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
       builder: (BuildContext context, GoRouterState state, Widget child) {
