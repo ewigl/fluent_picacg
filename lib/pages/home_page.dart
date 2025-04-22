@@ -1,12 +1,12 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:fluent_picacg/utils/dio_network_service.dart';
+import 'package:fluent_picacg/utils/api_service.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  static final networkService = DioNetworkService();
+  static final apiService = ApiService();
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +15,10 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Button(
-            child: Text('网络请求'),
+            child: Text('获取推荐'),
             onPressed: () async {
-              try {
-                final response = await networkService.get('collections');
-                debugPrint('Response: ${response.data}');
-              } catch (e) {
-                debugPrint('Error: $e');
-              }
+              final response = await apiService.getCollections();
+              debugPrint('网络请求结果: ${response.data}');
             },
           ),
           Button(
