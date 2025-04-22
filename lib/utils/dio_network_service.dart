@@ -6,13 +6,8 @@ import 'package:uuid/uuid.dart';
 class DioNetworkService {
   late Dio _dio;
 
-  // 单例实例
   static final DioNetworkService _instance = DioNetworkService._internal();
-
-  // 工厂构造函数，返回单例实例
   factory DioNetworkService() => _instance;
-
-  // 私有构造函数
   DioNetworkService._internal() {
     _dio = Dio(BaseOptions(baseUrl: 'https://picaapi.picacomic.com/'));
   }
@@ -71,14 +66,10 @@ class DioNetworkService {
         final statusCode = response.statusCode;
         final errorMessage =
             response.data is Map ? response.data['message'] ?? '未知错误' : '失败请求';
-        switch (statusCode) {
-          case 401:
-            return Exception('错误 401 Unauthorized: $errorMessage');
-          case 403:
-            return Exception('错误 403 Forbidden: $errorMessage');
-          default:
-            return Exception('失败请求: $statusCode $errorMessage');
-        }
+
+        final parsedErrorMessage = parseErrorMessage(errorMessage.toString());
+
+        return Exception('$statusCode, $parsedErrorMessage');
       }
       switch (error.type) {
         case DioExceptionType.connectionTimeout:
@@ -90,6 +81,18 @@ class DioNetworkService {
       }
     }
     return Exception('未知错误: $error');
+  }
+
+  String parseErrorMessage(String errorMessage) {
+    String parsedMessage;
+
+    if (errorMessage.contains('invalid email or password')) {
+      parsedMessage = '用户名或密码错误！';
+    } else {
+      parsedMessage = errorMessage;
+    }
+
+    return parsedMessage;
   }
 
   Map<String, String> generateHeaders(String method, String path) {
