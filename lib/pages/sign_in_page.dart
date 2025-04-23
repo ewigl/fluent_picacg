@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:fluent_picacg/data/states.dart';
 import 'package:fluent_picacg/utils/api_service.dart';
 
 class SignInPage extends StatefulWidget {
@@ -15,6 +16,8 @@ class _SignInPageState extends State<SignInPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isLoading = false;
+
+  final authState = AuthState();
 
   @override
   void dispose() {
@@ -32,9 +35,15 @@ class _SignInPageState extends State<SignInPage> {
     final password = _passwordController.text;
 
     try {
-      await ApiService().signIn(username: username, password: password);
+      final response = await ApiService().signIn(
+        username: username,
+        password: password,
+      );
 
       if (!mounted) return;
+      // 登录成功，保存 token
+      final token = response.data['data']['token'];
+      authState.setToken(token);
 
       displayInfoBar(
         context,
