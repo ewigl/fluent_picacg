@@ -1,4 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
+
+import 'package:fluent_picacg/utils/dio_network_service.dart';
 import 'package:fluent_picacg/utils/sembast_database.dart';
 
 // 图片质量
@@ -112,4 +114,40 @@ class AppSettingsState with ChangeNotifier {
     };
     await _db.saveSettings(settings);
   }
+}
+
+class AuthState with ChangeNotifier {
+  String? _token;
+  final SembastDatabase _db = SembastDatabase();
+
+  String? get token => _token;
+
+  AuthState() {
+    _loadToken();
+  }
+
+  Future<void> _loadToken() async {
+    final authInfo = await _db.getAuth();
+    _token = authInfo?['token'];
+    if (_token != null) {
+      DioNetworkService().setToken(_token);
+    }
+    notifyListeners();
+  }
+
+  Future<void> setToken(String token) async {
+    _token = token;
+    DioNetworkService().setToken(token);
+    await _db.saveAuth({'token': token});
+    notifyListeners();
+  }
+
+  Future<void> clearToken() async {
+    _token = null;
+    DioNetworkService().setToken(null);
+    await _db.deleteAuth();
+    notifyListeners();
+  }
+
+  bool get isLoggedIn => _token != null && _token!.isNotEmpty;
 }

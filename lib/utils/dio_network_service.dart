@@ -27,6 +27,12 @@ class DioNetworkService {
     'user-agent': 'okhttp/3.8.1',
   };
 
+  String? _token;
+
+  void setToken(String? token) {
+    _token = token;
+  }
+
   Future<Response> get(
     String path, {
     Map<String, dynamic>? queryParameters,
@@ -99,12 +105,18 @@ class DioNetworkService {
     final nonce = Uuid().v4().replaceAll('-', '');
     final time = (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString();
     final signature = getSignature(path, time, nonce, method);
-    return {
+    final headers = {
       ...staticHeaders,
       'nonce': nonce,
       'signature': signature,
       'time': time,
     };
+
+    if (_token != null) {
+      headers['authorization'] = _token!;
+    }
+
+    return headers;
   }
 
   String getSignature(String path, String time, String nonce, String method) {
